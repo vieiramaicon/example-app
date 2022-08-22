@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,15 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $nomes = ['Maicon', 'Vieira', "De Oliveira", "Josefa"];
-    $idades = [31, 32, 27, 28, 30];
+Route::get('/', [EventController::class, 'index']);
 
-    return view('welcome', [
-        'nomes' => $nomes,
-        'idades' => $idades
-    ]);
-});
+Route::get('/events/create', [EventController::class, 'create']);
+
+Route::get('/events/login', [EventController::class, 'login']);
+
+Route::get('/events/register', [EventController::class, 'register']);
 
 Route::get('/contact', function() {
     return view('/contact');
