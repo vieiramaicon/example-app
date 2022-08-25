@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
         <!-- CSS BootStrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         <!-- CSS da aplicação -->
         <link rel="stylesheet" href="/css/styles.css">
@@ -48,7 +48,9 @@
         
         @yield('content')
         
-        <footer>HDC Events &copy; 2022 </footer>
+        <footer>
+            <p>HDC Events &copy; 2022</p>  
+        </footer>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> 

@@ -25,3 +25,5 @@ Route::get('/events/register', [EventController::class, 'register']);
 Route::get('/contact', function() {
     return view('/contact');
 });
+
+Route::post('/events', [EventController::class, 'store']);
