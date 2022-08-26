@@ -22,6 +22,8 @@ Route::get('/events/login', [EventController::class, 'login']);
 
 Route::get('/events/register', [EventController::class, 'register']);
 
+Route::get('/events/{id}', [EventController::class, 'show']);
+
 Route::get('/contact', function() {
     return view('/contact');
 });

@@ -10,24 +10,30 @@ class EventController extends Controller
     public function index() {
         $events = Event::all();
 
-        return view('welcome', ['events' => $events]); 
+        return view("welcome", ["events" => $events]); 
     }
 
     public function create() {
-        return view('events.create');
+        return view("events.create");
     }
 
     public function login() {
-        return view('events.login');
+        return view("events.login");
     }
 
     public function register() {
-        return view('events.register');
+        return view("events.register");
+    }
+
+    public function show($id) {
+        $event = Event::findOrFail($id);
+
+        return view("events.show", ["event" => $event]);
     }
 
     public function store(Request $request) {
         $event = new Event;
-
+        
         $event->title = $request->title;
         $event->city = $request->city;
         $event->private = $request->private;
@@ -37,12 +43,16 @@ class EventController extends Controller
         if($request->hasFile('image') && $request->file('image')->isValid()) {
             // Pegar imagem
             $requestImage = $request->image;
+            
             // Pegar extensão da imagem
             $extension = $requestImage->extension();
+            
             // Criar nome único da imagem
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            
             // Salvar imagem no diretório
             $requestImage->move(public_path("img/events"), $imageName);
+
             $event->image = $imageName;
         }
 

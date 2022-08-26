@@ -1,8 +1,8 @@
-@extends('layouts.main')
+@extends("layouts.main")
 
-@section('title', 'Criar')
+@section("title", "Criar")
 
-@section('content')
+@section("content")
     <div id="event-create-container" class="col-md-6 offset-md-3">
     <h1>Crie o seu evento</h1>
     <form action="/events" method="POST" enctype="multipart/form-data">
