@@ -28,13 +28,6 @@ Route::get('/contact', function() {
     return view('/contact');
 });
 
+Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware('auth');
+
 Route::post('/events', [EventController::class, 'store']);
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
