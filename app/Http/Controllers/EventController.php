@@ -83,8 +83,50 @@ class EventController extends Controller
     }
 
     public function destroy($id) {
-        Event::findOrFail($id)->delete();
+        $event = Event::findOrFail($id);
+        $image = $event->image;
+
+        $event->delete();
+        unlink(public_path('/img/events/').$image);
+
 
         return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso!');
+    }
+
+    public function edit($id) {
+        $event = Event::findOrFail($id);
+
+        return view('events.edit', ['event' => $event]);
+    }
+
+    public function update(Request $request) {
+        $data = $request->all();
+
+        $event = Event::findOrFail($request->id);
+
+        // Image upload
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            // Pegar imagem
+            $requestImage = $request->image;
+            
+            // Pegar extensão da imagem
+            $extension = $requestImage->extension();
+            
+            // Criar nome único da imagem
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            
+            // Salvar imagem no diretório
+            $requestImage->move(public_path("/img/events"), $imageName);
+
+            // Excluir imagem antiga
+            unlink(public_path("/img/events/").$event->image );
+            
+            $data['image'] = $imageName;
+
+        }
+
+        $event->update($data);
+
+        return redirect('/dashboard')->with("msg", "Evento editado com sucesso!");
     }
 }
